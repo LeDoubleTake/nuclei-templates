@@ -1,0 +1,27 @@
+id: apache-server-info
+
+info:
+  name: Check Apache Server Info
+  author: DoubleTake
+  severity: low
+  description: This template checks if the URL/server_info endpoint returns a 200 response code and whether the response contains the string "Server Version".
+
+  tags:
+    - server-info
+    - apache
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/server-info"
+
+    matchers:
+      - type: status
+        part: body
+        status:
+          - 304
+      - type: word
+        part: response
+        words:
+          - "Server Version:"
+          
